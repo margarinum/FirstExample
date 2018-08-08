@@ -1,4 +1,4 @@
-package ru.src.items;
+package ru.taskdata.model.component;
 
 public class Processor {
 
@@ -9,8 +9,13 @@ public class Processor {
     Processor(){}
 
     public void start(){
-        System.out.println("Processor started!");
-
+        System.out.println("Processor is starting......");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Processor started!!!");
     }
 
     public void stop(){

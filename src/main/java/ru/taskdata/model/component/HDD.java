@@ -1,4 +1,4 @@
-package ru.src.items;
+package ru.taskdata.model.component;
 
 public class HDD {
     private enum hddType{HHD, SSD, Flash};
