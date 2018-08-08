@@ -6,9 +6,7 @@ public class Processor {
     private Integer cores;
     private Integer cahce;
 
-    Processor(){}
-
-    public void start(){
+    public void start() {
         System.out.println("Processor is starting......");
         try {
             Thread.sleep(1000);
@@ -18,7 +16,7 @@ public class Processor {
         System.out.println("Processor started!!!");
     }
 
-    public void stop(){
+    public void stop() {
         System.out.println("Processor stopped!");
 
     }
@@ -40,10 +38,10 @@ public class Processor {
     }
 
     public Integer getCores() {
-        return cores;
+        return this.cores;
     }
 
     public Integer getCahce() {
-        return cahce;
+        return this.cahce;
     }
 }
