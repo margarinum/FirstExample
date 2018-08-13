@@ -12,9 +12,24 @@ public class Processor implements IDevice {
 
     public void start() {
         System.out.println("Processor is starting......");
+        //TODO Сделать нормальную проверку
+        //Проверяем параметры
+        if (this.frequency != null){
+            System.out.println("Frequency checked...");
+        } else {
+            System.out.println("Frequency check failed!");
+        }
+
+        if (this.cahce != null){
+            System.out.println("Cache checked...");
+        } else {
+            System.out.println("Cache check ");
+        }
+
+
         try {
             Thread.sleep(1000);
-            //Укажем индикатор состояния = 1
+            //Укажем индикатор состояния
             this.eDeviceState = EDeviceState.ONLINE;
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -26,7 +41,7 @@ public class Processor implements IDevice {
         System.out.println("Processor stopping......");
         try {
             Thread.sleep(1000);
-            //Укажем индикатор состояния = 0
+            //Укажем индикатор состояния
             this.eDeviceState = EDeviceState.OFFLINE;
         } catch (InterruptedException e) {
             System.out.println(e);
@@ -53,7 +68,7 @@ public class Processor implements IDevice {
     }
 
     public String getFrequency() {
-        return frequency;
+        return this.frequency;
     }
 
     public Integer getCores() {

@@ -15,7 +15,7 @@ public class HDD implements IDevice {
         System.out.println("HDD is starting......");
         try {
             Thread.sleep(1000);
-            //Укажем индикатор состояния = 1
+            //Укажем индикатор состояния
             this.eDeviceState = EDeviceState.ONLINE;
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -27,7 +27,7 @@ public class HDD implements IDevice {
         System.out.println("HDD going to stop....");
         try {
             Thread.sleep(3000);
-            //Укажем индикатор состояния = 0
+            //Укажем индикатор состояния
             this.eDeviceState = EDeviceState.OFFLINE;
 
         } catch (
