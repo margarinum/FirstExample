@@ -1,21 +1,22 @@
 package ru.taskdata.model.component;
-import ru.taskdata.model.component.ERAMType;
+import ru.taskdata.model.IDevice;
+
 
 import java.util.Arrays;
 
-public class RAM {
+public class RAM implements IDevice {
 
     private ERAMType eramType;
     private Double capacity;
-    private int deviceState = 0;
+    private EDeviceState eDeviceState;
 
-
+    @Override
     public void start(){
         System.out.println("RAM starting......");
         try {
             Thread.sleep(1000);
             //Укажем индикатор состояния = 1
-            deviceState = 1;
+            this.eDeviceState = EDeviceState.ONLINE;
         } catch (InterruptedException e) {
             System.out.println(e);
         }
@@ -23,18 +24,25 @@ public class RAM {
 
     }
 
+    @Override
     public void stop(){
         System.out.println("RAM stopping......");
         try {
             Thread.sleep(1000);
-            //Укажем индикатор состояния = 0
-            deviceState = 0;
+            //Укажем индикатор состояния OFFLINE
+            this.eDeviceState = EDeviceState.OFFLINE;
         } catch (InterruptedException e) {
             System.out.println(e);
         }
         System.out.println("RAM stopped!");
 
     }
+
+    @Override
+    public EDeviceState getDeviceState() {
+        return this.eDeviceState;
+    }
+
 
     public void getAllRAMType() {
         System.out.println(Arrays.toString(eramType.values()));

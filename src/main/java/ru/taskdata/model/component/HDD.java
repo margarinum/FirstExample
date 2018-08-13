@@ -1,11 +1,14 @@
 package ru.taskdata.model.component;
 
+import ru.taskdata.model.IDevice;
+
 import java.util.Arrays;
 
-public class HDD {
+public class HDD implements IDevice {
     private EHDDType ehddType;
     private double capacity;
-    private int deviceState = 0;
+    private EDeviceState eDeviceState;
+
 
 
     public void start() {
@@ -13,7 +16,7 @@ public class HDD {
         try {
             Thread.sleep(1000);
             //Укажем индикатор состояния = 1
-            deviceState = 1;
+            this.eDeviceState = EDeviceState.ONLINE;
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -25,12 +28,18 @@ public class HDD {
         try {
             Thread.sleep(3000);
             //Укажем индикатор состояния = 0
-            deviceState = 0;
+            this.eDeviceState = EDeviceState.OFFLINE;
+
         } catch (
                 InterruptedException e) {
             e.printStackTrace();
         }
         System.out.println("HDD stopped!");
+    }
+
+    @Override
+    public EDeviceState getDeviceState() {
+        return this.eDeviceState;
     }
 
 

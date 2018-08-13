@@ -1,18 +1,21 @@
 package ru.taskdata.model.component;
+import ru.taskdata.model.IDevice;
+import ru.taskdata.model.component.EDeviceState;
 
-public class Processor {
+
+public class Processor implements IDevice {
 
     private String frequency;
     private Integer cores;
     private Integer cahce;
-    private int deviceState = 0;
+    private EDeviceState eDeviceState;
 
     public void start() {
         System.out.println("Processor is starting......");
         try {
             Thread.sleep(1000);
             //Укажем индикатор состояния = 1
-            deviceState = 1;
+            this.eDeviceState = EDeviceState.ONLINE;
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -24,12 +27,17 @@ public class Processor {
         try {
             Thread.sleep(1000);
             //Укажем индикатор состояния = 0
-            deviceState = 0;
+            this.eDeviceState = EDeviceState.OFFLINE;
         } catch (InterruptedException e) {
             System.out.println(e);
         }
         System.out.println("Processor stopped!");
 
+    }
+
+    //Getter получает текущий статус работы устройства
+    public EDeviceState getDeviceState() {
+        return this.eDeviceState;
     }
 
     public void setFrequency(String frequency) {
