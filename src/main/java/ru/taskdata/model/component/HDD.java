@@ -5,12 +5,15 @@ import java.util.Arrays;
 public class HDD {
     private EHDDType ehddType;
     private double capacity;
+    private int deviceState = 0;
 
 
     public void start() {
         System.out.println("HDD is starting......");
         try {
             Thread.sleep(1000);
+            //Укажем индикатор состояния = 1
+            deviceState = 1;
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -21,6 +24,8 @@ public class HDD {
         System.out.println("HDD going to stop....");
         try {
             Thread.sleep(3000);
+            //Укажем индикатор состояния = 0
+            deviceState = 0;
         } catch (
                 InterruptedException e) {
             e.printStackTrace();

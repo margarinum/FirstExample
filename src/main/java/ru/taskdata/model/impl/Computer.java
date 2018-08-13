@@ -24,7 +24,6 @@ public class Computer implements IComputer {
     @Override
     public void rumRAM() {
         hdd.start();
-        System.out.println("RAM running");
     }
 
     public Processor getProcessor() {
