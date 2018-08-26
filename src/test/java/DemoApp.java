@@ -1,20 +1,29 @@
-import ru.taskdata.model.component.EHDDType;
-import ru.taskdata.model.component.ERAMType;
-import ru.taskdata.model.component.HDD;
-import ru.taskdata.model.component.RAM;
+import ru.taskdata.model.component.*;
+import ru.taskdata.model.impl.PrintSplit;
 
 public class DemoApp {
     public static void main(String[] args) {
-        System.out.println("ghljhgljhgkjhgjkhy");
-        HDD hdd = new HDD();
-        hdd.getAllHddType();
-        hdd.setEhddType(EHDDType.Flash);
-        System.out.println("-----");
-        System.out.println(hdd.getEhddType().toString());
-
         RAM ram = new RAM();
-        ram.getAllRAMType();
-        ram.setEramType(ERAMType.DDR3);
-        System.out.println(ram.getEramType().toString());
+        ram.setEramType(ERAMType.DDR2);
+        ram.setCapacity(200.0);
+        ram.start();
+
+        PrintSplit.printDots();
+
+        HDD hdd = new HDD();
+        hdd.setCapacity(2220.0);
+        hdd.setEhddType(EHDDType.SSD);
+        hdd.start();
+
+        PrintSplit.printDots();
+
+        Processor processor = new Processor();
+        processor.start();
+        processor.setCahce(2);
+        processor.setCores(3);
+        processor.setFrequency(4);
+        processor.start();
+
+
     }
 }

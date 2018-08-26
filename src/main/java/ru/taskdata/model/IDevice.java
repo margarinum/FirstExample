@@ -5,6 +5,7 @@ public interface IDevice {
 
     void start();
     void stop();
+
     EDeviceState getDeviceState();
 
 

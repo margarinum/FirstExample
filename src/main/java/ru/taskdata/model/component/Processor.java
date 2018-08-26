@@ -1,81 +1,119 @@
 package ru.taskdata.model.component;
 import ru.taskdata.model.IDevice;
 import ru.taskdata.model.component.EDeviceState;
+import ru.taskdata.model.impl.LagCreate;
 
 
 public class Processor implements IDevice {
 
-    private String frequency;
+    private Integer frequency;
     private Integer cores;
     private Integer cahce;
     private EDeviceState eDeviceState;
 
+    //Установим устройству статус "Отключено"
+    public Processor() {
+        this.eDeviceState = EDeviceState.OFFLINE;
+    }
+
     public void start() {
-        System.out.println("Processor is starting......");
-        //TODO Сделать нормальную проверку
-        //Проверяем параметры
-        if (this.frequency != null){
-            System.out.println("Frequency checked...");
+        //Проверим, не стартовало ли устройство
+        if (this.eDeviceState != EDeviceState.OFFLINE) {
+            System.out.println("This processor already started!");
+
         } else {
-            System.out.println("Frequency check failed!");
-        }
 
-        if (this.cahce != null){
-            System.out.println("Cache checked...");
-        } else {
-            System.out.println("Cache check ");
+            System.out.println("Processor starting......");
+            //Проверим установку всех параметров
+            checkComplex();
+            if (this.getDeviceState() == EDeviceState.NOT_CONFIGURED) {
+                System.out.println("Cannot start processor - device is not configured");
+                this.stop();
+                //Если системный параметр установлен, то стартуем устройство
+            } else {
+                LagCreate.lag1000();
+                this.eDeviceState = EDeviceState.ONLINE;
+                System.out.println("Processor online!");
+            }
         }
-
-
-        try {
-            Thread.sleep(1000);
-            //Укажем индикатор состояния
-            this.eDeviceState = EDeviceState.ONLINE;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("Processor started!!!");
     }
 
-    public void stop(){
-        System.out.println("Processor stopping......");
-        try {
-            Thread.sleep(1000);
-            //Укажем индикатор состояния
+    public void stop() {
+        //Проверим, что устройство не остановлено
+        if (this.eDeviceState == EDeviceState.OFFLINE) {
+            System.out.println("Processor is not running! Nothing to stop");
+
+        } else {
+            System.out.println("Processor going to stop....");
+            LagCreate.lag1000();
             this.eDeviceState = EDeviceState.OFFLINE;
-        } catch (InterruptedException e) {
-            System.out.println(e);
+            System.out.println("Processor stopped!");
         }
-        System.out.println("Processor stopped!");
+    }
+
+    //Метод проверки конфигурации устройства
+
+    private void checkComplex() {
+        System.out.println("Frequency checking...");
+        LagCreate.lag1000();
+
+        if (this.getFrequency() == null) {
+            setDeviceState(EDeviceState.NOT_CONFIGURED);
+            System.out.println("Frequency is not configured!");
+        } else {
+            System.out.println("Frequency checked");
+        }
+
+        System.out.println("Cores type checking...");
+        LagCreate.lag2000();
+        if (this.getCores() == null) {
+            setDeviceState(EDeviceState.NOT_CONFIGURED);
+            System.out.println("Cores is not configured!");
+        } else {
+            System.out.println("Cores checked!");
+        }
+
+        System.out.println("Cache checking...");
+        LagCreate.lag2000();
+        if (this.getCahce() == null) {
+            setDeviceState(EDeviceState.NOT_CONFIGURED);
+            System.out.println("Cache is not configured!");
+        } else {
+            System.out.println("Cache type checked!");
+        }
 
     }
 
-    //Getter получает текущий статус работы устройства
-    public EDeviceState getDeviceState() {
-        return this.eDeviceState;
+    private Integer getFrequency() {
+        return this.frequency;
     }
 
-    public void setFrequency(String frequency) {
+    public void setFrequency(Integer frequency) {
         this.frequency = frequency;
+    }
+
+    private Integer getCores() {
+        return cores;
     }
 
     public void setCores(Integer cores) {
         this.cores = cores;
     }
 
+    private Integer getCahce() {
+        return cahce;
+    }
+
     public void setCahce(Integer cahce) {
         this.cahce = cahce;
     }
 
-    public String getFrequency() {
-        return this.frequency;
+    public EDeviceState getDeviceState() {
+        return eDeviceState;
     }
 
-    public Integer getCores() {
-        return this.cores;
+    private void setDeviceState(EDeviceState eDeviceState) {
+        this.eDeviceState = eDeviceState;
     }
 
-    public Integer getCahce() {
-        return this.cahce;
-    }
 }

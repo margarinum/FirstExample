@@ -1,7 +1,7 @@
 package ru.taskdata.model.component;
+
 import ru.taskdata.model.IDevice;
-
-
+import ru.taskdata.model.impl.LagCreate;
 import java.util.Arrays;
 
 public class RAM implements IDevice {
@@ -10,39 +10,78 @@ public class RAM implements IDevice {
     private Double capacity;
     private EDeviceState eDeviceState;
 
-    @Override
-    public void start(){
-        System.out.println("RAM starting......");
-        try {
-            Thread.sleep(1000);
-            //Укажем индикатор состояния = 1
-            this.eDeviceState = EDeviceState.ONLINE;
-        } catch (InterruptedException e) {
-            System.out.println(e);
-        }
-        System.out.println("RAM online!");
-
+    //Установим устройству статус "Отключено"
+    public RAM(){
+        this.eDeviceState = EDeviceState.OFFLINE;
     }
 
     @Override
-    public void stop(){
-        System.out.println("RAM stopping......");
-        try {
-            Thread.sleep(1000);
-            //Укажем индикатор состояния OFFLINE
+    public void start() {
+        //Проверим, не стартовало ли устройство
+        if (this.eDeviceState != EDeviceState.OFFLINE){
+            System.out.println("This RAM already started!");
+
+        } else {
+
+            System.out.println("RAM starting......");
+            //Проверим установку всех параметров
+            checkComplex();
+            if (this.getDeviceState() == EDeviceState.NOT_CONFIGURED) {
+                System.out.println("Cannot start RAM - device is not configured");
+                this.stop();
+                //Если системный параметр установлен, то стартуем устройство
+            } else {
+                LagCreate.lag1000();
+                this.eDeviceState = EDeviceState.ONLINE;
+                System.out.println("RAM online!");
+            }
+        }
+    }
+
+    //Метод проверки конфигурации устройства
+    private void checkComplex() {
+        System.out.println("Capacity checking...");
+        LagCreate.lag1000();
+
+        if (this.getCapacity() == null) {
+            seteDeviceState(EDeviceState.NOT_CONFIGURED);
+            System.out.println("Capacity is not configured!");
+        } else {
+            System.out.println("Сapacity checked");
+        }
+
+        System.out.println("RAM type checking...");
+        LagCreate.lag2000();
+        if (this.getEramType() == null) {
+            seteDeviceState(EDeviceState.NOT_CONFIGURED);
+            System.out.println("RAM type is not configured!");
+        } else {
+            System.out.println("RAM type checked!");
+        }
+
+    }
+
+    //Остановка устройства
+    public void stop() {
+        //Проверим, что устройство не остановлено
+        if (this.eDeviceState == EDeviceState.OFFLINE) {
+            System.out.println("RAM is not running! Nothing to stop");
+
+        } else {
+            System.out.println("RAM going to stop....");
+            LagCreate.lag1000();
             this.eDeviceState = EDeviceState.OFFLINE;
-        } catch (InterruptedException e) {
-            System.out.println(e);
+            System.out.println("RAM stopped!");
         }
-        System.out.println("RAM stopped!");
-
     }
 
-    @Override
     public EDeviceState getDeviceState() {
         return this.eDeviceState;
     }
 
+    private void seteDeviceState(EDeviceState eDeviceState) {
+        this.eDeviceState = eDeviceState;
+    }
 
     public void getAllRAMType() {
         System.out.println(Arrays.toString(eramType.values()));
@@ -56,7 +95,7 @@ public class RAM implements IDevice {
         this.eramType = eramType;
     }
 
-    public Double getCapacity() {
+    private Double getCapacity() {
         return capacity;
     }
 
