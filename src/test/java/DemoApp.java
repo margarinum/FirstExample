@@ -1,28 +1,22 @@
 import ru.taskdata.model.component.*;
+import ru.taskdata.model.impl.Computer;
 import ru.taskdata.model.impl.PrintSplit;
 
 public class DemoApp {
     public static void main(String[] args) {
-        RAM ram = new RAM();
-        ram.setEramType(ERAMType.DDR2);
-        ram.setCapacity(200.0);
-        ram.start();
-
-        PrintSplit.printDots();
+        Processor processor = new Processor();
 
         HDD hdd = new HDD();
-        hdd.setCapacity(2220.0);
-        hdd.setEhddType(EHDDType.SSD);
-        hdd.start();
 
+        RAM ram = new RAM();
+
+        Computer computer = new Computer(processor, hdd, ram);
+        computer.rumHDD(hdd);
         PrintSplit.printDots();
-
-        Processor processor = new Processor();
-        processor.start();
-        processor.setCahce(2);
-        processor.setCores(3);
-        processor.setFrequency(4);
-        processor.start();
+        computer.rumRAM(ram);
+        PrintSplit.printDots();
+        computer.runProcessor(processor);
+        PrintSplit.printDots();
 
 
     }

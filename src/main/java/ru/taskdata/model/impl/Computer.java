@@ -11,18 +11,21 @@ public class Computer implements IComputer {
 
     }
 
-    public void runProcessor(Processor processor) {
+    public void runProcessor() {
+        Processor processor = new Processor();
         processor.setDefaultParameters();
         processor.start();
 
     }
 
-    public void rumHDD(HDD hdd) {
+    public void rumHDD() {
+        HDD hdd = new HDD();
         hdd.setDefaultParameters();
         hdd.start();
     }
 
-    public void rumRAM(RAM ram) {
+    public void rumRAM() {
+        RAM ram = new RAM();
         ram.setDefaultParameters();
         ram.start();
     }
