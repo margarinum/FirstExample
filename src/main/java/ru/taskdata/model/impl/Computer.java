@@ -1,4 +1,5 @@
 package ru.taskdata.model.impl;
+
 import ru.taskdata.model.component.HDD;
 import ru.taskdata.model.component.Processor;
 import ru.taskdata.model.component.RAM;
@@ -6,47 +7,36 @@ import ru.taskdata.model.IComputer;
 
 public class Computer implements IComputer {
 
-    private Processor processor ;
-    private HDD hdd;
-    private RAM ram;
+    public Computer(Processor processor, HDD hdd, RAM ram){
 
+    }
 
-    @Override
-    public void runProcessor() {
+    public void runProcessor(Processor processor) {
+        processor.setDefaultParameters();
         processor.start();
+
     }
 
-    @Override
-    public void rumHDD() {
+    public void rumHDD(HDD hdd) {
+        hdd.setDefaultParameters();
         hdd.start();
     }
 
-    @Override
-    public void rumRAM() {
-        hdd.start();
+    public void rumRAM(RAM ram) {
+        ram.setDefaultParameters();
+        ram.start();
     }
 
-    public Processor getProcessor() {
-        return processor;
+    public void stopProcessor(Processor processor){
+        processor.stop();
     }
 
-    public void setProcessor(Processor processor) {
-        this.processor = processor;
+    public void stopHDD(HDD hdd){
+        hdd.stop();
     }
 
-    public HDD getHdd() {
-        return hdd;
+    public void stopRAM(RAM ram){
+        ram.stop();
     }
 
-    public void setHdd(HDD hdd) {
-        this.hdd = hdd;
-    }
-
-    public RAM getRam() {
-        return ram;
-    }
-
-    public void setRam(RAM ram) {
-        this.ram = ram;
-    }
 }

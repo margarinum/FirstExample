@@ -15,6 +15,12 @@ public class HDD implements IDevice {
         this.eDeviceState = EDeviceState.OFFLINE;
     }
 
+    public void setDefaultParameters(){
+        this.setEhddType(EHDDType.SSD);
+        this.setCapacity(2.0);
+
+    }
+
     public void start() {
         //Проверим, не стартовало ли устройство
         if (this.eDeviceState != EDeviceState.OFFLINE) {

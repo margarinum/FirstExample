@@ -1,6 +1,5 @@
 package ru.taskdata.model.component;
 import ru.taskdata.model.IDevice;
-import ru.taskdata.model.component.EDeviceState;
 import ru.taskdata.model.impl.LagCreate;
 
 
@@ -14,6 +13,13 @@ public class Processor implements IDevice {
     //Установим устройству статус "Отключено"
     public Processor() {
         this.eDeviceState = EDeviceState.OFFLINE;
+    }
+
+    public void setDefaultParameters(){
+        this.setCores(2);
+        this.setCahce(2);
+        this.setFrequency(3);
+
     }
 
     public void start() {

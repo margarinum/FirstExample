@@ -15,6 +15,12 @@ public class RAM implements IDevice {
         this.eDeviceState = EDeviceState.OFFLINE;
     }
 
+    public void setDefaultParameters(){
+        this.setEramType(ERAMType.DDR3);
+        this.setCapacity(3.0);
+
+    }
+
     @Override
     public void start() {
         //Проверим, не стартовало ли устройство
