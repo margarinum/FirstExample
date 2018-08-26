@@ -57,9 +57,10 @@ public class Processor implements IDevice {
         }
     }
 
-    //Метод проверки конфигурации устройства
+    //Метод проверки конфигурации устройства, используем getter's
 
     private void checkComplex() {
+        //Если какой-то параметр не установлен, устанавливаем статус устройства NOT_CONFIGURED
         System.out.println("Frequency checking...");
         LagCreate.lag1000();
 

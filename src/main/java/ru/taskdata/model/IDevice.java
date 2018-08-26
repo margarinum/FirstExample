@@ -5,6 +5,8 @@ public interface IDevice {
 
     void start();
     void stop();
+    //Ввел метод для упрощения создания тестовых примеров. Устанавливает свойства по умолчанию
+    void setDefaultParameters();
 
     EDeviceState getDeviceState();
 

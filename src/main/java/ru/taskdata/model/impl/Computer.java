@@ -7,27 +7,57 @@ import ru.taskdata.model.IComputer;
 
 public class Computer implements IComputer {
 
-    public Computer(Processor processor, HDD hdd, RAM ram){
+    Processor processor;
+    HDD hdd;
+    RAM ram;
 
-    }
+    /*Первый конструктор не принимает параметров и создает объекты устройств с методом setDefaultParameters
+    Он устанавливает стандартные значения устройств
+     */
 
-    public void runProcessor() {
-        Processor processor = new Processor();
+    public Computer(){
+        processor = new Processor();
         processor.setDefaultParameters();
-        processor.start();
 
-    }
-
-    public void rumHDD() {
-        HDD hdd = new HDD();
-        hdd.setDefaultParameters();
-        hdd.start();
-    }
-
-    public void rumRAM() {
-        RAM ram = new RAM();
+        ram = new RAM();
         ram.setDefaultParameters();
+
+        hdd = new HDD();
+        hdd.setDefaultParameters();
+    }
+
+    /*Второй конструктор принимает на вход объекты устройств
+     */
+
+    public Computer(Processor processor, RAM ram, HDD hdd){
+        processor = new Processor();
+        ram = new RAM();
+        hdd = new HDD();
+
+    }
+
+    public void startAllDevices(){
+        System.out.println("Computer starting...");
+        PrintSplit.printDots();
+        runProcessor(processor);
+        rumHDD(hdd);
+        rumRAM(ram);
+    }
+
+    public void runProcessor(Processor processor) {
+        processor.start();
+        PrintSplit.printDots();
+
+    }
+
+    public void rumHDD(HDD hdd) {
+        hdd.start();
+        PrintSplit.printDots();
+    }
+
+    public void rumRAM(RAM ram) {
         ram.start();
+        PrintSplit.printDots();
     }
 
     public void stopProcessor(Processor processor){
@@ -42,4 +72,27 @@ public class Computer implements IComputer {
         ram.stop();
     }
 
+    public Processor getProcessor() {
+        return processor;
+    }
+
+    public void setProcessor(Processor processor) {
+        this.processor = processor;
+    }
+
+    public HDD getHdd() {
+        return hdd;
+    }
+
+    public void setHdd(HDD hdd) {
+        this.hdd = hdd;
+    }
+
+    public RAM getRam() {
+        return ram;
+    }
+
+    public void setRam(RAM ram) {
+        this.ram = ram;
+    }
 }
