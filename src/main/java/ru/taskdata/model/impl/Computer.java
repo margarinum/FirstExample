@@ -1,4 +1,5 @@
 package ru.taskdata.model.impl;
+
 import ru.taskdata.model.component.HDD;
 import ru.taskdata.model.component.Processor;
 import ru.taskdata.model.component.RAM;
@@ -6,25 +7,69 @@ import ru.taskdata.model.IComputer;
 
 public class Computer implements IComputer {
 
-    private Processor processor ;
-    private HDD hdd;
-    private RAM ram;
+    Processor processor;
+    HDD hdd;
+    RAM ram;
 
+    /*Первый конструктор не принимает параметров и создает объекты устройств с методом setDefaultParameters
+    Он устанавливает стандартные значения устройств
+     */
 
-    @Override
-    public void runProcessor() {
+    public Computer(){
+        processor = new Processor();
+        processor.setDefaultParameters();
+
+        ram = new RAM();
+        ram.setDefaultParameters();
+
+        hdd = new HDD();
+        hdd.setDefaultParameters();
+    }
+
+    /*Второй конструктор принимает на вход объекты устройств
+     */
+
+    public Computer(Processor processor, RAM ram, HDD hdd){
+        processor = new Processor();
+        ram = new RAM();
+        hdd = new HDD();
+
+    }
+
+    public void startAllDevices(){
+        System.out.println("Computer starting...");
+        PrintSplit.printDots();
+        runProcessor(processor);
+        rumHDD(hdd);
+        rumRAM(ram);
+    }
+
+    public void runProcessor(Processor processor) {
         processor.start();
+        PrintSplit.printDots();
+
     }
 
-    @Override
-    public void rumHDD() {
+    public void rumHDD(HDD hdd) {
         hdd.start();
+        PrintSplit.printDots();
     }
 
-    @Override
-    public void rumRAM() {
-        hdd.start();
-        System.out.println("RAM running");
+    public void rumRAM(RAM ram) {
+        ram.start();
+        PrintSplit.printDots();
+    }
+
+    public void stopProcessor(Processor processor){
+        processor.stop();
+    }
+
+    public void stopHDD(HDD hdd){
+        hdd.stop();
+    }
+
+    public void stopRAM(RAM ram){
+        ram.stop();
     }
 
     public Processor getProcessor() {
