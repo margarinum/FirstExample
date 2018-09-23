@@ -1,7 +1,7 @@
 package ru.taskdata.model.component;
 
 import ru.taskdata.model.IDevice;
-import ru.taskdata.model.impl.LagCreate;
+import ru.taskdata.model.utils.LagCreate;
 
 import java.util.Arrays;
 
@@ -10,12 +10,15 @@ public class HDD implements IDevice {
     private Double capacity;
     private EDeviceState eDeviceState;
 
+    public enum EHDDType {SSD, HDD, Flash}
+
     //Установим устройству статус "Отключено"
-    public HDD(){
+    public HDD() {
         this.eDeviceState = EDeviceState.OFFLINE;
     }
 
-    public void setDefaultParameters(){
+
+    public void setDefaultParameters() {
         this.setEhddType(EHDDType.SSD);
         this.setCapacity(2.0);
 

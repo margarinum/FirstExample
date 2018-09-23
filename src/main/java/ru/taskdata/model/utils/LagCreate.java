@@ -1,4 +1,4 @@
-package ru.taskdata.model.impl;
+package ru.taskdata.model.utils;
 
 //Класс устанавливает SLEEP
 public class LagCreate {

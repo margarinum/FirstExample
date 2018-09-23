@@ -1,4 +1,4 @@
-package ru.taskdata.model.impl;
+package ru.taskdata.model.utils;
 
 public class PrintSplit {
     public static void printDots(){

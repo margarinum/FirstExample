@@ -10,5 +10,7 @@ public interface IDevice {
 
     EDeviceState getDeviceState();
 
+    enum EDeviceState { ONLINE, OFFLINE, NOT_CONFIGURED}
+
 
 }

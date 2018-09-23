@@ -4,6 +4,8 @@ import ru.taskdata.model.component.HDD;
 import ru.taskdata.model.component.Processor;
 import ru.taskdata.model.component.RAM;
 import ru.taskdata.model.IComputer;
+import ru.taskdata.model.utils.LagCreate;
+import ru.taskdata.model.utils.PrintSplit;
 
 public class Computer implements IComputer {
 
@@ -15,84 +17,69 @@ public class Computer implements IComputer {
     Он устанавливает стандартные значения устройств
      */
 
-    public Computer(){
-        processor = new Processor();
-        processor.setDefaultParameters();
-
-        ram = new RAM();
-        ram.setDefaultParameters();
-
-        hdd = new HDD();
-        hdd.setDefaultParameters();
+    public Computer(Processor processor, HDD hdd, RAM ram) {
+        this.processor = processor;
+        this.hdd = hdd;
+        this.ram = ram;
     }
 
-    /*Второй конструктор принимает на вход объекты устройств
-     */
-
-    public Computer(Processor processor, RAM ram, HDD hdd){
-        processor = new Processor();
-        ram = new RAM();
-        hdd = new HDD();
-
+    public Computer() {
+        this.processor.setDefaultParameters();
+        this.hdd.setDefaultParameters();
+        this.ram.setDefaultParameters();
     }
 
     public void startAllDevices(){
         System.out.println("Computer starting...");
+        LagCreate.lag2000();
         PrintSplit.printDots();
-        runProcessor(processor);
-        rumHDD(hdd);
-        rumRAM(ram);
+        runProcessor();
+        runHDD();
+        runRAM();
+        PrintSplit.printDots();
+        System.out.println("Computer started!");
     }
 
-    public void runProcessor(Processor processor) {
+    public void stopAllDevices(){
+        System.out.println("Computer stopping...");
+        LagCreate.lag1000();
+        PrintSplit.printDots();
+        stopProcessor();
+        stopHDD();
+        stopRAM();
+        PrintSplit.printDots();
+        System.out.println("Computer stopped!");
+    }
+
+    public void runProcessor() {
         processor.start();
         PrintSplit.printDots();
 
     }
 
-    public void rumHDD(HDD hdd) {
+    public void runHDD() {
         hdd.start();
         PrintSplit.printDots();
     }
 
-    public void rumRAM(RAM ram) {
+    public void runRAM() {
         ram.start();
         PrintSplit.printDots();
     }
 
-    public void stopProcessor(Processor processor){
+    public void stopProcessor(){
         processor.stop();
     }
 
-    public void stopHDD(HDD hdd){
+    public void stopHDD(){
         hdd.stop();
     }
 
-    public void stopRAM(RAM ram){
+    public void stopRAM(){
         ram.stop();
     }
 
-    public Processor getProcessor() {
-        return processor;
-    }
 
-    public void setProcessor(Processor processor) {
-        this.processor = processor;
-    }
 
-    public HDD getHdd() {
-        return hdd;
-    }
 
-    public void setHdd(HDD hdd) {
-        this.hdd = hdd;
-    }
-
-    public RAM getRam() {
-        return ram;
-    }
-
-    public void setRam(RAM ram) {
-        this.ram = ram;
-    }
 }

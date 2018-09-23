@@ -1,6 +1,6 @@
 package ru.taskdata.model.component;
 import ru.taskdata.model.IDevice;
-import ru.taskdata.model.impl.LagCreate;
+import ru.taskdata.model.utils.LagCreate;
 
 
 public class Processor implements IDevice {

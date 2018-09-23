@@ -1,7 +1,7 @@
 package ru.taskdata.model.component;
 
 import ru.taskdata.model.IDevice;
-import ru.taskdata.model.impl.LagCreate;
+import ru.taskdata.model.utils.LagCreate;
 import java.util.Arrays;
 
 public class RAM implements IDevice {
@@ -9,6 +9,8 @@ public class RAM implements IDevice {
     private ERAMType eramType;
     private Double capacity;
     private EDeviceState eDeviceState;
+
+    public enum ERAMType {SIMM, DIMM, DDR, DDR2, DDR3}
 
     //Установим устройству статус "Отключено"
     public RAM(){
