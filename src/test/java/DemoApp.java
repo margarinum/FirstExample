@@ -1,12 +1,11 @@
-import ru.taskdata.model.ComputerRunner;
-import ru.taskdata.model.impl.Computer;
+import ru.taskdata.model.ComputerRunnerFacade;
 
 public class DemoApp {
     public static void main(String[] args) {
 
-        ComputerRunner computerRunner = new ComputerRunner();
-        Computer computer = computerRunner.add();
-        computerRunner.run(computer);
+        ComputerRunnerFacade computerRunnerFacade = new ComputerRunnerFacade();
+        //Computer computer = computerRunnerFacade.add();
+        //computerRunnerFacade.run(computer);
 
 
     }

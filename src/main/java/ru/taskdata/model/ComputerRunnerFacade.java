@@ -5,7 +5,7 @@ import ru.taskdata.model.impl.Computer;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ComputerRunner  {
+public class ComputerRunnerFacade {
 
 
     Map<IComputer, String> hashmap = new HashMap<IComputer, String>();
